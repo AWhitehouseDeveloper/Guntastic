@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GunMode : MonoBehaviour
 {
+    public GameObject[] guns;
     // Start is called before the first frame update
     void Start()
     {
