@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+
     public int projectiles = 1;
     public float shotRange = 1.0f;
     public float fireRate = 1.0f;
@@ -11,9 +12,10 @@ public class Gun : MonoBehaviour
     public Transform firepoint;
 
     public GameObject bulletPrefab;
-
+    public GameObject[] guns;
 
     void Update()
+
     {
         firerate -= Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && firerate <= 0)
