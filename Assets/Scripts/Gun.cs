@@ -28,8 +28,8 @@ public class Gun : MonoBehaviour
     public void Shoot()
     {
         //shooting logic
-        //var spawnedBullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        //spawnedBullet.AddForce(firepoint.right * shotRange);
+        var spawnedBullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+        //Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+        spawnedBullet.GetComponent<Rigidbody>().AddForce(firepoint.right * shotRange);
     }
 }
