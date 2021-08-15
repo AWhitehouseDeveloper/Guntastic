@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        //you get coloured but other players do not.
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }

@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: 233858561761138735, guid: ad47a152f876a7341896c227fc3f5b45, type: 3}
   - {fileID: 1748475730495476015, guid: 148e924357ec366498e1693cfb01c035, type: 3}
   - {fileID: 0}
-  weaponPlacement: {fileID: 0}
+  weaponPlacement: {fileID: 540087554730934288}
 --- !u!61 &-3560500965026558937
 BoxCollider2D:
   m_ObjectHideFlags: 0

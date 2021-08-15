@@ -20,6 +20,7 @@ public class HealthBar : MonoBehaviour
         slider.maxValue = maxHealth;
         slider.value = maxHealth;
 
+        //only colours your health bar
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
