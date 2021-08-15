@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public float speed, jumpForce;
     public HealthBar healthBar;
     public Gun[] guns = new Gun[4];
-    public SpriteRenderer sprite;
+    public GameObject weaponPlacement;
     private float x;
     private Rigidbody2D rb;
     private bool onFloor = false;
@@ -18,7 +18,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-         
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
     // Update is called once per frame
