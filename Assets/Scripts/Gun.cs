@@ -28,9 +28,24 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        //shooting logic
-        var spawnedBullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        //Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        spawnedBullet.GetComponent<Rigidbody>().AddForce(firepoint.right * shotRange);
+        if(projectiles == 1)
+        {
+            //shooting logic
+            var spawnedBullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+            //Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+            spawnedBullet.GetComponent<Rigidbody2D>().AddForce(firepoint.right * shotRange);
+        }
+        //else
+        //{
+        //    Debug.Log("Multiple Projectiles");
+        //    for (int i = 0; i < projectiles; i++)
+        //    {
+        //        Debug.Log(i);
+        //        //shooting logic
+        //        var spawnedBullet = Instantiate(bulletPrefab, firepoint.position * Random.Range(-.75f,.75f), firepoint.rotation);
+        //        //Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+        //        spawnedBullet.GetComponent<Rigidbody2D>().AddForce(firepoint.right * shotRange);
+        //    }
+        //}
     }
 }
