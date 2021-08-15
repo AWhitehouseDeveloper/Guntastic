@@ -11,13 +11,21 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject impactEffect;
 
+    public float bulletTimelimit = 2f;
+
     void Start()
     {
+        bulletTimelimit = 2f;
         rb.velocity = transform.right * speed;
     }
 
     void Update()
     {
+        bulletTimelimit -= Time.deltaTime;
+        if(bulletTimelimit <= 0)
+        {
+            Destroy(gameObject);
+        }
        
     }
 

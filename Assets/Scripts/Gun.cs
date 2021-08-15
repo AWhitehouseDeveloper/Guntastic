@@ -7,8 +7,9 @@ public class Gun : MonoBehaviour
 
     public int projectiles = 1;
     public float shotRange = 1.0f;
+    //firerate per gun
     public float fireRate = 1.0f;
-    private float firerate = 1.0f;
+    private float firerate = 0.1f;
     public Transform firepoint;
 
     public GameObject bulletPrefab;
@@ -18,7 +19,7 @@ public class Gun : MonoBehaviour
 
     {
         firerate -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && firerate <= 0)
+        if (Input.GetMouseButton(0) && firerate <= 0)
         {
             firerate = fireRate;
             Shoot();

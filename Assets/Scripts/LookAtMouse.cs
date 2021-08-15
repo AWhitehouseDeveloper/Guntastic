@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class LookAtMouse : MonoBehaviour
 {
-  
-    // Update is called once per frame
+
     void Update()
     {
-        //Get the Screen positions of the object
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        //Mouse Position in the world. It's important to give it some distance from the camera. 
+        //If the screen point is calculated right from the exact position of the camera, then it will
+        //just return the exact same position as the camera, which is no good.
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f);
 
-        //Get the Screen position of the mouse
-        Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Angle between mouse and this object
+        float angle = AngleBetweenPoints(transform.position, mouseWorldPosition);
 
-        //Get the angle between the points
-        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-
-        //Ta Daaa
+        //Ta daa
         transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
 
-    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    float AngleBetweenPoints(Vector2 a, Vector2 b)
     {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
