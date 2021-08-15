@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public GameObject weaponPlacement;
     private float x;
     private Rigidbody2D rb;
+    private SpriteRenderer sprite;
     private bool onFloor = false;
     private int jumps = 0, maxHealth = 100, health, kills = 0;
     private Gun currentGun;
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         //you get coloured but other players do not.
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
         sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
@@ -27,7 +28,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         x = Input.GetAxis("Horizontal");
-
+        if(x < 0)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
         //TakeDamage(5);
     }
