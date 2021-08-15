@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-<<<<<<< HEAD
     public float speed;
     public float jumpForce;
     private float x;
     private Rigidbody2D rb;
     private bool onFloor = false;
     private int jumps = 0;
-    // Start is called before the first frame update
-=======
->>>>>>> d90093de149e1677dcb69e17bb6d509b422537ee
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
