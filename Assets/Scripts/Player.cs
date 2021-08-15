@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
-    public float jumpForce;
+    public float speed, jumpForce;
+    public HealthBar healthBar;
+    public Gun[] guns = new Gun[4];
+    public SpriteRenderer sprite;
     private float x;
     private Rigidbody2D rb;
     private bool onFloor = false;
-    private int jumps = 0;
+    private int jumps = 0, maxHealth = 100, health, kills = 0;
+    private Gun currentGun;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+         
     }
 
     // Update is called once per frame
@@ -21,6 +27,7 @@ public class Player : MonoBehaviour
         x = Input.GetAxis("Horizontal");
 
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
+        //TakeDamage(5);
     }
 
     private void FixedUpdate()
@@ -50,6 +57,26 @@ public class Player : MonoBehaviour
         {
             Debug.Log("floor exit");
             onFloor = false;
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.SetHealth(health);
+    }
+
+    private void OnKill()
+    {
+        kills++;
+        if (kills < 4)
+        {
+            currentGun = guns[kills];
+        }
+        else
+        {
+            Debug.Log("Someone won!");
+            return;
         }
     }
 }
