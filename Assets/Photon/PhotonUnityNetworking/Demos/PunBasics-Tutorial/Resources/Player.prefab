@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 915828075993693062}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915828075993693118
 GameObject:
@@ -66,8 +66,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
-  - {fileID: 1937145097424883633}
   - {fileID: 8440089297437231662}
+  - {fileID: 1937145097424883633}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -262,15 +262,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae6e8c87a66edd4eb07917c6f1a832d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 5
   healthBar: {fileID: 2214171080225539884}
   guns:
   - {fileID: 1204811511594666169, guid: b802a98cab467f949b2a4870edd2017e, type: 3}
   - {fileID: 233858561761138735, guid: ad47a152f876a7341896c227fc3f5b45, type: 3}
   - {fileID: 1748475730495476015, guid: 148e924357ec366498e1693cfb01c035, type: 3}
-  - {fileID: 0}
+  - {fileID: 3022358646076692919, guid: d967c337a9b6bb846a5a6f8bff7819d2, type: 3}
   weaponPlacement: {fileID: 540087554730934288}
+  weaponPoint: {fileID: 8440089297437231662}
+  speed: 5
+  jumpForce: 5
 --- !u!61 &-3560500965026558937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ RectTransform:
   m_Children:
   - {fileID: 1100363521156928386}
   m_Father: {fileID: 915828075993693062}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

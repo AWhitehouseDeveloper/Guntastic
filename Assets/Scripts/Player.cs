@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed, jumpForce;
+    private Gun currentGun;
     public HealthBar healthBar;
     public Gun[] guns = new Gun[4];
     public GameObject weaponPlacement;
-    private float x;
     private Rigidbody2D rb;
+    public Transform weaponPoint;
+    private float x;
+    public float speed, jumpForce;
     private bool onFloor = false;
-    private int jumps = 0, maxHealth = 100, health, kills = 0;
-    private Gun currentGun;
+    private int jumps = 0, kills = 0;
+    private float health = 0;
+    private float maxHealth = 100f;
     void Start()
     {
+        currentGun = guns[0];
+        currentGun = Instantiate(currentGun, new Vector3( weaponPlacement.transform.position.x, weaponPlacement.transform.position.y, 0), Quaternion.identity);
+        currentGun.transform.parent = gameObject.transform;
+        //Instantiate(guns[1], weaponPlacement.transform.position, weaponPlacement.transform.rotation);
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -62,13 +69,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.SetHealth(health);
     }
 
-    private void OnKill()
+    public void OnKill()
     {
         kills++;
         if (kills < 4)

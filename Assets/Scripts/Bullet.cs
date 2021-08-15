@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-           // player.Takedamage()
+            player.TakeDamage(damage);
         }
         //Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
