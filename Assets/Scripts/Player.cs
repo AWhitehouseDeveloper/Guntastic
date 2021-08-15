@@ -4,23 +4,48 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
-    public float jumpForce;
-    private float x;
+    private Gun currentGun;
+    public HealthBar healthBar;
+    public Gun[] guns = new Gun[4];
+    public GameObject weaponPlacement;
     private Rigidbody2D rb;
+    public Transform weaponPoint;
+    private float x;
+    public float speed, jumpForce;
+    private SpriteRenderer sprite;
+
     private bool onFloor = false;
-    private int jumps = 0;
+    private int jumps = 0, kills = 0;
+    private float health = 0;
+    private float maxHealth = 100f;
     void Start()
     {
+        currentGun = guns[0];
+        currentGun = Instantiate(currentGun, new Vector3( weaponPlacement.transform.position.x, weaponPlacement.transform.position.y, 0), Quaternion.identity);
+        currentGun.transform.parent = gameObject.transform;
+        //Instantiate(guns[1], weaponPlacement.transform.position, weaponPlacement.transform.rotation);
         rb = GetComponent<Rigidbody2D>();
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        //you get coloured but other players do not.
+        sprite = GetComponent<SpriteRenderer>();
+        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
     // Update is called once per frame
     void Update()
     {
         x = Input.GetAxis("Horizontal");
-
+        if(x < 0)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
+        //TakeDamage(5);
     }
 
     private void FixedUpdate()
@@ -50,6 +75,26 @@ public class Player : MonoBehaviour
         {
             Debug.Log("floor exit");
             onFloor = false;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthBar.SetHealth(health);
+    }
+
+    public void OnKill()
+    {
+        kills++;
+        if (kills < 4)
+        {
+            currentGun = guns[kills];
+        }
+        else
+        {
+            Debug.Log("Someone won!");
+            return;
         }
     }
 }

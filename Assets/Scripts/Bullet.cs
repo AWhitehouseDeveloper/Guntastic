@@ -9,14 +9,23 @@ public class Bullet : MonoBehaviour
     public float speed = 20f;
 
     public Rigidbody2D rb;
+    public GameObject impactEffect;
+
+    public float bulletTimelimit = 2f;
 
     void Start()
     {
+        bulletTimelimit = 2f;
         rb.velocity = transform.right * speed;
     }
 
     void Update()
     {
+        bulletTimelimit -= Time.deltaTime;
+        if(bulletTimelimit <= 0)
+        {
+            Destroy(gameObject);
+        }
        
     }
 
@@ -25,8 +34,9 @@ public class Bullet : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if(player != null)
         {
-           // player.Takedamage()
+            player.TakeDamage(damage);
         }
+        //Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }
