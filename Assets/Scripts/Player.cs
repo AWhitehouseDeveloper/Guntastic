@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     public Gun[] guns = new Gun[4];
     public Transform weaponPlacement;
     private Rigidbody2D rb;
-    public Transform weaponPoint;
     private float x;
     public float speed, jumpForce;
     private SpriteRenderer sprite;
@@ -25,7 +24,7 @@ public class Player : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         currentGun = guns[0];
-        currentGun = Instantiate(currentGun, new Vector3( weaponPlacement.transform.position.x, weaponPlacement.transform.position.y, 0), Quaternion.identity);
+        currentGun = Instantiate(currentGun, new Vector3(weaponPlacement.transform.position.x, weaponPlacement.transform.position.y, 0), Quaternion.identity);
         currentGun.transform.parent = gameObject.transform;
         //Instantiate(guns[1], weaponPlacement.transform.position, weaponPlacement.transform.rotation);
         rb = GetComponent<Rigidbody2D>();
@@ -42,19 +41,15 @@ public class Player : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         if(x < 0)
         {
-            sprite.flipX = true;
-            weaponPlacement.position = new Vector2(-weaponPlacement.position.x, weaponPlacement.position.y);
+            gameObject.transform.localRotation = new Quaternion(0, 180, 0, 0);
+            weaponPlacement.localPosition = new Vector2(-(weaponPlacement.position.x), weaponPlacement.position.y);
         }
-        if(x > 0)
+        else if(x > 0)
         {
-            weaponPlacement.position = new Vector2(Math.Abs(weaponPlacement.position.x), weaponPlacement.position.y);
-            sprite.flipX = false;
+            gameObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
+            weaponPlacement.localPosition = new Vector2(Math.Abs(weaponPlacement.position.x), weaponPlacement.position.y);
         }
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
-        //TakeDamage(5);
-
-
-        //if (health <= 0) GetComponent<PhotonManager>().
     
         if (Input.GetButtonDown("Jump") && (onFloor || jumps < 2))
         {
