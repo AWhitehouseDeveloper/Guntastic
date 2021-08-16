@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
             jumps++;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
+        if (health <= 0) PhotonNetwork.LeaveRoom();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
