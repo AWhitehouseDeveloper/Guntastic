@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class Player : MonoBehaviour
     private Gun currentGun;
     public HealthBar healthBar;
     public Gun[] guns = new Gun[4];
-    public GameObject weaponPlacement;
+    public Transform weaponPlacement;
     private Rigidbody2D rb;
     public Transform weaponPoint;
     private float x;
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         //you get coloured but other players do not.
         sprite = GetComponent<SpriteRenderer>();
-        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
     // Update is called once per frame
@@ -39,9 +39,11 @@ public class Player : MonoBehaviour
         if(x < 0)
         {
             sprite.flipX = true;
+            weaponPlacement.position = new Vector2(-weaponPlacement.position.x, weaponPlacement.position.y);
         }
-        else
+        if(x > 0)
         {
+            weaponPlacement.position = new Vector2(Math.Abs(weaponPlacement.position.x), weaponPlacement.position.y);
             sprite.flipX = false;
         }
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
