@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class LaunchController : MonoBehaviourPunCallbacks
 {
@@ -52,5 +53,9 @@ public class LaunchController : MonoBehaviourPunCallbacks
             isConnecting = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
         }
+    }
+    public void onOptions()
+    {
+        SceneManager.LoadScene("Options");
     }
 }
