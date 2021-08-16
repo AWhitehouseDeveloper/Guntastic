@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class OptionsController : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class OptionsController : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         timeTilnextSong = TimeTilNextSong;
     }
 
@@ -29,10 +29,10 @@ public class OptionsController : MonoBehaviour
         {
             timeTilnextSong -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             OnOptionsScreen();
-        }
+        }*/
         if(timeTilnextSong <= -1.5f)
         {
             timeTilnextSong = TimeTilNextSong;
@@ -42,8 +42,8 @@ public class OptionsController : MonoBehaviour
 
     public void OnOptionsScreen()
     {
-        isPaused = isPaused ? false : true;
-        optionsScreen.SetActive(isPaused);
+        optionsScreen.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     public void OnMasterVolume(float level)
