@@ -24,6 +24,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Player", transform.position, Quaternion.identity);
+        var player = PhotonNetwork.Instantiate("Player", transform.position, Quaternion.identity);
     }
 }

@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class LookAtMouse : MonoBehaviour
 {
 
     void Update()
     {
+        var photonView = GetComponentInParent<PhotonView>();
+        if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
         //Mouse Position in the world. It's important to give it some distance from the camera. 
         //If the screen point is calculated right from the exact position of the camera, then it will
         //just return the exact same position as the camera, which is no good.
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f);
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         //Angle between mouse and this object
         float angle = AngleBetweenPoints(transform.position, mouseWorldPosition);

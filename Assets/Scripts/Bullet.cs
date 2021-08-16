@@ -6,16 +6,16 @@ public class Bullet : MonoBehaviour
 {
     public float damage;
     public float size;
-    public float speed = 20f;
+    public float speed = 60f;
 
     public Rigidbody2D rb;
     public GameObject impactEffect;
 
-    public float bulletTimelimit = 2f;
+    public float bulletTimelimit = 8f;
 
     void Start()
     {
-        bulletTimelimit = 2f;
+        bulletTimelimit = 3f;
         rb.velocity = transform.right * speed;
     }
 

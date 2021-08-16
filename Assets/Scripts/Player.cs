@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     private float x;
     public float speed, jumpForce;
     private SpriteRenderer sprite;
+    PhotonView photonView;
 
     private bool onFloor = false;
     private int jumps = 0, kills = 0;
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     private float maxHealth = 100f;
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         currentGun = guns[0];
         currentGun = Instantiate(currentGun, new Vector3( weaponPlacement.transform.position.x, weaponPlacement.transform.position.y, 0), Quaternion.identity);
         currentGun.transform.parent = gameObject.transform;
@@ -35,6 +38,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
         x = Input.GetAxis("Horizontal");
         if(x < 0)
         {
@@ -48,11 +52,10 @@ public class Player : MonoBehaviour
         }
         transform.position += (Vector3) new Vector2(x * speed * Time.deltaTime, 0);
         //TakeDamage(5);
-    }
 
-    private void FixedUpdate()
-    {
-            Debug.Log("fixed");
+
+        //if (health <= 0) GetComponent<PhotonManager>().
+    
         if (Input.GetButtonDown("Jump") && (onFloor || jumps < 2))
         {
             Debug.Log(jumps);
@@ -65,7 +68,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("floor enter");
             onFloor = true;
             jumps = 0;
         }
@@ -75,7 +77,6 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Floor")
         {
-            Debug.Log("floor exit");
             onFloor = false;
         }
     }
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
         kills++;
         if (kills < 4)
         {
-            currentGun = guns[kills];
+            //currentGun = guns[kills];
         }
         else
         {
