@@ -268,7 +268,7 @@ MonoBehaviour:
   - {fileID: 233858561761138735, guid: ad47a152f876a7341896c227fc3f5b45, type: 3}
   - {fileID: 1748475730495476015, guid: 148e924357ec366498e1693cfb01c035, type: 3}
   - {fileID: 3022358646076692919, guid: d967c337a9b6bb846a5a6f8bff7819d2, type: 3}
-  weaponPlacement: {fileID: 540087554730934288}
+  weaponPlacement: {fileID: 8440089297437231662}
   weaponPoint: {fileID: 0}
   speed: 5
   jumpForce: 5
