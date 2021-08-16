@@ -67,6 +67,10 @@ public class Player : MonoBehaviour
             onFloor = true;
             jumps = 0;
         }
+        if(collision.gameObject.tag == "Death")
+        {
+            health = 0;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
